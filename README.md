@@ -1,8 +1,8 @@
-# Odysee Media Server
+# LiveTV Media Server
 
 An RTMP ingestion server + API server packaged as docker containers for managing and controlling streams, restreams, and archives.
 
-This is the backbone of livestreaming for [bitwave.tv]
+This is the backbone of livestreaming for [qtunetv]
 
 Utilizing tech such as NGINX, ffmpeg, node.js, and docker.
 
