@@ -43,7 +43,7 @@ class StreamRelay {
     // Waste some time probing the input for up to 15 seconds
     try {
       const probeResult = await this.probeInputAsync( inputStream );
-      relayLogger.info( `Probe returned: ${probeResult}` );
+      relayLogger.info( `[${user}] Probe returned: ${probeResult}` );
     } catch ( error ) {
       relayLogger.error( error );
       return false;
@@ -75,11 +75,11 @@ class StreamRelay {
 
       screenshotFFmpeg
         .on( 'start', commandLine => {
-          relayLogger.info( chalk.yellowBright( `Starting preview thumbnail generator` ) );
+          // relayLogger.info( chalk.yellowBright( `Starting preview thumbnail generator` ) );
         })
 
         .on( 'end', () => {
-          relayLogger.info( chalk.green( `Created preview thumbnail for ${user}.` ) );
+          // relayLogger.info( chalk.green( `Created preview thumbnail for ${user}.` ) );
         })
 
         .on( 'error', ( error, stdout, stderr ) => {
@@ -99,6 +99,7 @@ class StreamRelay {
         });
       screenshotFFmpeg.run();
     };
+    //TODO: this is probably useless and wastes server resources.
     const thumbnailTimer = setInterval( () => generateThumbnail(), 60 * 1000 );
 
 
@@ -127,6 +128,7 @@ class StreamRelay {
       '-vsync 0',
       '-copyts',
       '-start_at_zero',
+      '-movflags faststart',
 
       '-x264opts no-scenecut',
     ]);
